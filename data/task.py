@@ -10,5 +10,7 @@ class Task(SqlAchemyBase):
     description = sa.Column(sa.Text, nullable=False)
     correct_answer = sa.Column(sa.String(200), nullable=False)
     solution = sa.Column(sa.Text, nullable=False)
+    has_image = sa.Column(sa.Boolean, nullable=False)
+    image_name = sa.Column(sa.String(200), nullable=True)
     category_id = sa.Column(sa.Integer, sa.ForeignKey('categories.id'))
     category = relationship('Category', back_populates='tasks')

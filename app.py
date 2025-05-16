@@ -1,7 +1,10 @@
+import os
+
 from flask import Flask, render_template, request, redirect, url_for, flash, abort
 from flask_wtf import CSRFProtect
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 
 from data import db_session
 from data.__all_models import User, Category, Task, UserTask
@@ -228,13 +231,23 @@ def manage_tasks():
     form.category_id.choices = [(c.id, c.name) for c in session.query(Category).all()]
 
     if form.validate_on_submit():
+        image = form.image.data
+        has_image = False
+        if image:
+            has_image = True
         task = Task(
             title=form.title.data,
             description=form.description.data,
             correct_answer=form.correct_answer.data,
             solution=form.solution.data,
-            category_id=form.category_id.data
+            category_id=form.category_id.data,
+            has_image=has_image
         )
+        if image:
+            extension = secure_filename(image.filename).split(".")[-1]
+            image_name = f"{task.id}.{extension}"
+            image.save(os.path.join(f"static/images/tasks", image_name))
+            task.image_name = image_name
         session.add(task)
         session.commit()
         flash('Задача добавлена!', 'success')
@@ -266,4 +279,4 @@ def delete_task(task_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(host='0.0.0.0', debug=False)
