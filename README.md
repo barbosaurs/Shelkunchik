@@ -38,7 +38,7 @@
 4. Запуск:
 
    ```bash
-   python app.py
+   python app.py --port <порт>
    ```
 
 ## Автор
