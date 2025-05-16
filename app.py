@@ -39,12 +39,14 @@ if not user:
     session.commit()
 session.close()
 
+
 @login_manager.user_loader
 def load_user(user_id):
     session = db_session.create_session()
     user = session.query(User).get(int(user_id))
     session.close()
     return user
+
 
 @app.route('/')
 def index():
@@ -66,6 +68,7 @@ def index():
             task.is_correct = task.id in correct_tasks
     session.close()
     return render_template('index.html', tasks=tasks, categories=categories, selected_category=category_id)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -106,12 +109,14 @@ def login():
 
     return render_template('auth/login.html', form=form)
 
+
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     flash("Вы вышли из аккаунта", "success")
     return redirect(url_for('index'))
+
 
 @app.route('/task/<int:task_id>', methods=['GET', 'POST'])
 def view_task(task_id):
@@ -158,6 +163,7 @@ def view_task(task_id):
 
     return render_template('task.html', task=task, form=form)
 
+
 @app.route('/account')
 @login_required
 def account():
@@ -169,11 +175,13 @@ def account():
 
     return render_template('account.html', total_tasks=total_tasks, solved_tasks=solved_tasks)
 
+
 @app.route('/leaderboard')
 def leaderboard():
     db_sess = db_session.create_session()
     users = db_sess.query(User).order_by(User.solved_tasks.desc()).all()
     return render_template('leaderboard.html', users=users)
+
 
 @app.route('/categories', methods=['GET', 'POST'])
 @login_required
@@ -194,6 +202,7 @@ def manage_categories():
     session.close()
     return render_template('manage_categories.html', categories=categories, form=form)
 
+
 @app.route('/categories/delete/<int:category_id>', methods=['GET'])
 @login_required
 def delete_category(category_id):
@@ -207,6 +216,7 @@ def delete_category(category_id):
         flash('Категория удалена!', 'success')
     session.close()
     return redirect(url_for('manage_categories'))
+
 
 @app.route('/tasks', methods=['GET', 'POST'])
 @login_required
@@ -235,6 +245,7 @@ def manage_tasks():
 
     return render_template('manage_tasks.html', form=form, tasks=tasks)
 
+
 @app.route('/tasks/delete/<int:task_id>', methods=['GET'])
 @login_required
 def delete_task(task_id):
@@ -255,4 +266,4 @@ def delete_task(task_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
