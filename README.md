@@ -18,7 +18,7 @@
 
    ```bash
    git clone https://github.com/barbosaurs/Shelkunchik.git
-   cd <папка>
+   cd Shelkunchik
    ```
 
 2. Создание и активация виртуального окружения:
