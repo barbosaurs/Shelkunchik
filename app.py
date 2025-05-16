@@ -248,6 +248,8 @@ def manage_tasks():
             has_image=has_image
         )
         if image:
+            image_folder = f"static/images/tasks"
+            os.makedirs(image_folder, exist_ok=True)
             extension = secure_filename(image.filename).split(".")[-1]
             image_name = f"{task.id}.{extension}"
             image.save(os.path.join(f"static/images/tasks", image_name))
