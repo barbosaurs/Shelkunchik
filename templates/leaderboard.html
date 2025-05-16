@@ -1,32 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="leaderboard-container">
-    <h2>Рейтинг пользователей</h2>
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title text-center mb-4">Рейтинг пользователей</h2>
 
-    <a href="{{ url_for('index') }}" class="btn btn-back">&larr; На главную</a>
+            <div class="d-flex justify-content-end mb-3">
+                <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3 mb-3">&larr; На главную</a>
+            </div>
 
-    {% if users %}
-    <table class="leaderboard-table" style="margin-top: 15px;">
-        <thead>
-            <tr>
-                <th>Место</th>
-                <th>Пользователь</th>
-                <th>Решённых задач</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
-            <tr>
-                <td>{{ loop.index }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.solved_tasks }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <p>Пока нет зарегистрированных пользователей.</p>
-    {% endif %}
+            {% if users %}
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Место</th>
+                            <th scope="col">Пользователь</th>
+                            <th scope="col">Решённых задач</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.solved_tasks }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="text-center mt-3">Пока нет зарегистрированных пользователей.</p>
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}

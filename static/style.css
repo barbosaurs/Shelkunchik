@@ -256,3 +256,51 @@ h1:hover {
   transform: scale(1.05);
   cursor: default;
 }
+
+.task-container {
+    max-width: 500px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.answer-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.btn-submit {
+    background: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+.btn-submit:hover {
+    background: #45a049;
+}
+.message-list {
+    margin-top: 15px;
+}
+.success {
+    color: green;
+}
+.danger {
+    color: red;
+}
+.back-link {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: #007bff;
+    text-decoration: none;
+}
+.back-link:hover {
+    text-decoration: underline;
+}

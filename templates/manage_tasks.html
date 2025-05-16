@@ -1,43 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="task-container" style="max-width: 700px; margin: 30px auto;">
-    <h2>Управление задачами</h2>
+<div class="container mt-5" style="max-width: 700px;">
+    <h2 class="mb-4">Управление задачами</h2>
 
-    <form method="POST">
+    <form method="POST" class="mb-4">
         {{ form.hidden_tag() }}
-        <div>
-            {{ form.title.label }}<br>
-            {{ form.title(class_='answer-input') }}
+        <div class="mb-3">
+            {{ form.title.label(class_='form-label') }}
+            {{ form.title(class_='form-control') }}
         </div>
-        <div>
-            {{ form.description.label }}<br>
-            {{ form.description(class_='answer-input') }}
+        <div class="mb-3">
+            {{ form.description.label(class_='form-label') }}
+            {{ form.description(class_='form-control') }}
         </div>
-        <div>
-            {{ form.correct_answer.label }}<br>
-            {{ form.correct_answer(class_='answer-input') }}
+        <div class="mb-3">
+            {{ form.correct_answer.label(class_='form-label') }}
+            {{ form.correct_answer(class_='form-control') }}
         </div>
-        <div>
-            {{ form.solution.label }}<br>
-            {{ form.solution(class_='answer-input') }}
+        <div class="mb-3">
+            {{ form.solution.label(class_='form-label') }}
+            {{ form.solution(class_='form-control') }}
         </div>
-        <div>
-            {{ form.category_id.label }}<br>
-            {{ form.category_id(class_='answer-input') }}
+        <div class="mb-3">
+            {{ form.category_id.label(class_='form-label') }}
+            {{ form.category_id(class_='form-select') }}
         </div>
-        <button type="submit" class="btn-submit">Добавить задачу</button>
+        <button type="submit" class="btn btn-primary">Добавить задачу</button>
     </form>
 
-    <h3 style="margin-top: 30px;">Список задач</h3>
-    <ul class="task-list" style="list-style: none; padding: 0;">
+    <h3 class="mb-3">Список задач</h3>
+    <ul class="list-group">
         {% for task in tasks %}
-        <li style="background: #f4f4f9; padding: 15px; margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
-            <a href="{{ url_for('view_task', task_id=task.id) }}" style="text-decoration: none; color: #333; font-weight: bold;">{{ task.title }}</a>
-            <a href="{{ url_for('delete_task', task_id=task.id) }}" class="danger" style="color: #e74c3c; text-decoration: none;">Удалить</a>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{{ url_for('view_task', task_id=task.id) }}" class="text-decoration-none text-dark fw-bold">{{ task.title }}</a>
+            <a href="{{ url_for('delete_task', task_id=task.id) }}" class="text-danger">Удалить</a>
         </li>
         {% endfor %}
     </ul>
-    <a href="{{ url_for('index') }}" class="btn btn-back">&larr; На главную</a>
+
+    <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3 mb-3">&larr; На главную</a>
 </div>
 {% endblock %}
