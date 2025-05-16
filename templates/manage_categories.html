@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="task-container" style="max-width: 600px; margin: 30px auto;">
+    <h2>Управление категориями</h2>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.name.label }}<br>
+            {{ form.name(class_="answer-input") }}
+            {% for error in form.name.errors %}
+                <span class="danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-register">{{ form.submit.label.text }}</button>
+    </form>
+
+    <ul class="category-list" style="margin-top: 20px;">
+        {% for category in categories %}
+            <li style="background: #f4f4f9; padding: 15px; margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                <a style="text-decoration: none; color: #333; font-weight: bold;">{{ category.name }}</a>
+                <a href="{{ url_for('delete_category', category_id=category.id) }}" class="danger" style="color: #e74c3c; text-decoration: none;">Удалить</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('index') }}" class="btn btn-back">&larr; На главную</a>
+</div>
+{% endblock %}

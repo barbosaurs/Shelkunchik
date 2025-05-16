@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="task-container">
+    <h2 style="text-align:center; margin-bottom: 30px;">Каталог задач</h2>
+    <form method="get" action="{{ url_for('index') }}" style="margin-bottom: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+  <label for="category-select" style="font-weight: 600;">Категория:</label>
+  <select name="category_id" id="category-select" onchange="this.form.submit()" style="padding: 6px 10px; border-radius: 5px; border: 1.8px solid #ccc; font-size: 1rem;">
+    <option value="">Все категории</option>
+    {% for category in categories %}
+      <option value="{{ category.id }}" {% if selected_category == category.id %}selected{% endif %}>{{ category.name }}</option>
+    {% endfor %}
+  </select>
+</form>
+    <ul style="list-style: none; padding: 0; margin: 0;">
+    {% for task in tasks %}
+        <li style="
+            background: #e9ecef;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        ">
+            <a href="{{ url_for('view_task', task_id=task.id) }}"
+               style="
+                 text-decoration: none;
+                 color: #333;
+                 font-weight: bold;
+                 display: block;
+               "
+               onmouseover="this.style.color='#4caf50'"
+               onmouseout="this.style.color='#333'">
+              {{ task.title }}
+            </a>
+
+            <span>{{ categories[task.category_id - 2].name }}</span>
+
+            {% if task.is_incorrect %}
+            <span class="danger">(Неправильно)</span>
+            {% endif %}
+            {% if task.is_correct %}
+            <span class="success">(Решено)</span>
+            {% endif %}
+            <p style="margin-top: 8px; color: #555;">{{ task.description }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="message-list">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+
+</div>
+{% endblock %}

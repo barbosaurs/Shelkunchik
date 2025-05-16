@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="leaderboard-container">
+    <h2>Рейтинг пользователей</h2>
+
+    <a href="{{ url_for('index') }}" class="btn btn-back">&larr; На главную</a>
+
+    {% if users %}
+    <table class="leaderboard-table" style="margin-top: 15px;">
+        <thead>
+            <tr>
+                <th>Место</th>
+                <th>Пользователь</th>
+                <th>Решённых задач</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.solved_tasks }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Пока нет зарегистрированных пользователей.</p>
+    {% endif %}
+</div>
+{% endblock %}

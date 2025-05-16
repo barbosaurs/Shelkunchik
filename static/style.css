@@ -1,0 +1,258 @@
+/* Навигация авторизации */
+.nav-auth {
+    text-align: right;
+    margin-top: -35px;
+    margin-bottom: 20px;
+}
+
+.nav-username {
+    font-weight: 600;
+    margin-right: 15px;
+    color: #333;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+/* Общий стиль кнопок */
+.btn {
+    padding: 7px 14px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 0.9rem;
+    margin-left: 8px;
+    display: inline-block;
+    user-select: none;
+}
+
+/* Кнопка Войти */
+.btn-login {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+}
+
+.btn-login:hover {
+    background-color: #1976d2;
+    color: #e0e0e0;
+}
+
+/* Кнопка Регистрация */
+.btn-register {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+}
+
+.btn-register:hover {
+    background-color: #388e3c;
+    color: #d0f0d0;
+}
+
+/* Кнопка Выйти */
+.btn-logout {
+    background-color: #f44336;
+    color: white;
+    border: none;
+}
+
+.btn-logout:hover {
+    background-color: #c62828;
+    color: #f8d7da;
+}
+
+.task-container {
+    background: #fff;
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    max-width: 600px;
+    margin: 40px auto;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.task-container h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #222;
+    font-weight: 700;
+}
+
+.task-container p {
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Инпут для ответа */
+.answer-input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1.8px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.answer-input:focus {
+    border-color: #4caf50;
+    outline: none;
+}
+
+/* Кнопка отправки */
+.task-container button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.task-container button:hover {
+    background-color: #45a049;
+}
+
+/* Ссылка назад */
+.back-link {
+    display: block;
+    margin-top: 25px;
+    text-align: center;
+    color: #007bff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Список сообщений */
+.message-list {
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+.message-list li.success {
+    color: #2e7d32;  /* Зеленый для успеха */
+    font-weight: 600;
+}
+
+.danger {
+    color: #c62828;
+    font-weight: bold;
+}
+
+.success {
+    color: #32fe00;
+    font-weight: bold;
+}
+
+.task-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    max-width: 600px;
+    margin: 40px auto;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.btn-leaderboard {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+}
+
+.btn-leaderboard:hover {
+    background-color: #f57c00;
+    color: #fff8e1;
+}
+
+/* Таблица рейтинга */
+.leaderboard-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.leaderboard-container h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: #222;
+    text-align: center;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leaderboard-table th, .leaderboard-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.leaderboard-table th {
+    background-color: #4caf50;
+    color: white;
+    font-weight: 600;
+}
+
+.leaderboard-table tr:hover {
+    background-color: #f1f8e9;
+}
+
+#category-select {
+    width: 100%;
+    max-width: 300px;
+    font-size: 1rem;
+    border: 1.8px solid #ccc;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+#category-select:focus {
+    border-color: #4caf50;
+    outline: none;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2C3E50;
+  text-align: left;
+  background: linear-gradient(90deg, #6DD5FA, #2980B9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 20px 0;
+  padding: 10px 20px;
+  border: 2px solid #2980B9;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+h1:hover {
+  transform: scale(1.05);
+  cursor: default;
+}

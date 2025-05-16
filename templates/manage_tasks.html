@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="task-container" style="max-width: 700px; margin: 30px auto;">
+    <h2>Управление задачами</h2>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.title.label }}<br>
+            {{ form.title(class_='answer-input') }}
+        </div>
+        <div>
+            {{ form.description.label }}<br>
+            {{ form.description(class_='answer-input') }}
+        </div>
+        <div>
+            {{ form.correct_answer.label }}<br>
+            {{ form.correct_answer(class_='answer-input') }}
+        </div>
+        <div>
+            {{ form.solution.label }}<br>
+            {{ form.solution(class_='answer-input') }}
+        </div>
+        <div>
+            {{ form.category_id.label }}<br>
+            {{ form.category_id(class_='answer-input') }}
+        </div>
+        <button type="submit" class="btn-submit">Добавить задачу</button>
+    </form>
+
+    <h3 style="margin-top: 30px;">Список задач</h3>
+    <ul class="task-list" style="list-style: none; padding: 0;">
+        {% for task in tasks %}
+        <li style="background: #f4f4f9; padding: 15px; margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+            <a href="{{ url_for('view_task', task_id=task.id) }}" style="text-decoration: none; color: #333; font-weight: bold;">{{ task.title }}</a>
+            <a href="{{ url_for('delete_task', task_id=task.id) }}" class="danger" style="color: #e74c3c; text-decoration: none;">Удалить</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}" class="btn btn-back">&larr; На главную</a>
+</div>
+{% endblock %}
