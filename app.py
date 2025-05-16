@@ -1,8 +1,12 @@
 import os
+import argparse
+from argparse import ArgumentParser
+from encodings.aliases import aliases
 
 from flask import Flask, render_template, request, redirect, url_for, flash, abort
 from flask_wtf import CSRFProtect
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from sqlalchemy import alias
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
@@ -279,4 +283,8 @@ def delete_task(task_id):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=False)
+    parser = ArgumentParser()
+    parser.add_argument('--port', type=int, default=5000)
+
+    args = parser.parse_args()
+    app.run(host='0.0.0.0', port=args.port, debug=False)
