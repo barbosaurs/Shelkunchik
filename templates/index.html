@@ -23,7 +23,7 @@
                 <a href="{{ url_for('view_task', task_id=task.id) }}" class="text-decoration-none text-dark fw-bold">
                     {{ task.title }}
                 </a>
-                <p class="mb-1 text-muted">{{ categories[task.category_id - 2].name }}</p>
+                <p class="mb-1 text-muted">{{ task.category_name }}</p>
                 <p class="mb-1">{{ task.description }}</p>
                 <span class="badge bg-danger" {% if not task.is_incorrect %}style="display: none;"{% endif %}>Неправильно</span>
                 <span class="badge bg-success" {% if not task.is_correct %}style="display: none;"{% endif %}>Решено</span>

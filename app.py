@@ -1,7 +1,7 @@
 import os
 import argparse
 from argparse import ArgumentParser
-from encodings.aliases import aliases
+import datetime as dt
 
 from flask import Flask, render_template, request, redirect, url_for, flash, abort
 from flask_wtf import CSRFProtect
@@ -32,7 +32,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-# Инициализация базы данных
+os.makedirs("db", exist_ok=True)
 db_session.global_init("db/database.db")
 
 session = db_session.create_session()
@@ -71,6 +71,11 @@ def index():
         incorrect_tasks = {t.task_id for t in user_tasks if not t.is_correct}
         correct_tasks = {t.task_id for t in user_tasks if t.is_correct}
         for task in tasks:
+            category = session.query(Category).get(task.category_id)
+            if category:
+                task.category_name = category.name
+            else:
+                task.category_name = ""
             task.is_incorrect = task.id in incorrect_tasks
             task.is_correct = task.id in correct_tasks
     session.close()
@@ -234,26 +239,27 @@ def manage_tasks():
     session = db_session.create_session()
     form.category_id.choices = [(c.id, c.name) for c in session.query(Category).all()]
 
+    image_folder = "static/images/tasks"
+    os.makedirs(image_folder, exist_ok=True)
+
     if form.validate_on_submit():
         image = form.image.data
         has_image = False
+        now = dt.datetime.now().strftime("%Y-%m-%d_%H%M%S")
         if image:
             has_image = True
+            extension = secure_filename(image.filename).split(".")[-1]
+            image_name = f"{now}.{extension}"
+            image.save(os.path.join(f"static/images/tasks", image_name))
         task = Task(
             title=form.title.data,
             description=form.description.data,
             correct_answer=form.correct_answer.data,
             solution=form.solution.data,
             category_id=form.category_id.data,
-            has_image=has_image
+            has_image=has_image,
+            image_name=image_name if has_image else None
         )
-        if image:
-            image_folder = f"static/images/tasks"
-            os.makedirs(image_folder, exist_ok=True)
-            extension = secure_filename(image.filename).split(".")[-1]
-            image_name = f"{task.id}.{extension}"
-            image.save(os.path.join(f"static/images/tasks", image_name))
-            task.image_name = image_name
         session.add(task)
         session.commit()
         flash('Задача добавлена!', 'success')
